@@ -29,5 +29,3 @@ RUN rm python3-rna_2.4.14-1_amd64.deb
 
 RUN mkdir mirna
 WORKDIR mirna
-COPY mirna .
-CMD ["python3", "../triplet/triplet_elements.py"]
