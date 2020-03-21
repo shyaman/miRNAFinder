@@ -65,6 +65,7 @@ RUN cd /opt/meme/meme-5.1.0 && \
         rm -rfv /opt/meme
 ENV PATH="/opt/bin:/opt/libexec/meme-5.1.0:${PATH}"
 ADD http://meme-suite.org/meme-software/Databases/motifs/motif_databases.12.19.tgz /opt/share/meme-5.1.0/db
+WORKDIR /opt/share/meme-5.1.0/db
 RUN tar xzf motif_databases.12.19.tgz && rm -fv motif_databases.12.19.tgz
 
 RUN adduser --disabled-password --gecos '' docker
