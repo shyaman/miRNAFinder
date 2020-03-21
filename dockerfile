@@ -19,7 +19,8 @@ autoconf automake libtool \
 libhtml-template-compiled-perl \
 libxml-opml-simplegen-perl \
 libxml-libxml-debugging-perl \
-openssh-server
+openssh-server \
+sudo
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y python3.6 \
 python-dev \
