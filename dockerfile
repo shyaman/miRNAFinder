@@ -63,7 +63,13 @@ RUN cd /opt/meme/meme-5.1.0 && \
 	make && \
 	make install && \
         rm -rfv /opt/meme
-ENV PATH="/opt/bin:${PATH}"
+ENV PATH="/opt/bin:/opt/libexec/meme-5.1.0:${PATH}"
+ADD http://meme-suite.org/meme-software/Databases/motifs/motif_databases.12.19.tgz /opt/share/meme-5.1.0/db
+RUN tar xzf motif_databases.12.19.tgz && rm -fv motif_databases.12.19.tgz
 
+RUN adduser --disabled-password --gecos '' docker
+RUN adduser docker sudo
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+USER docker
 RUN mkdir /mirna
 WORKDIR /mirna
