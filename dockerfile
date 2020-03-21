@@ -72,7 +72,7 @@ RUN tar xzf motif_databases.12.19.tgz && rm -fv motif_databases.12.19.tgz
 RUN adduser --disabled-password --gecos '' docker
 RUN adduser docker sudo
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+RUN chown docker:sudo /home/docker/mirna/ -R
 USER docker
 
-RUN mkdir /home/docker/mirna
 WORKDIR /home/docker/mirna
