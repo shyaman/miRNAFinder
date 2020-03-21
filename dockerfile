@@ -75,4 +75,5 @@ RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 RUN chown docker:sudo /home/docker/mirna/ -R
 USER docker
 
+RUN mkdir /home/docker/mirna
 WORKDIR /home/docker/mirna
