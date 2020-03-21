@@ -18,7 +18,9 @@ libxml2-dev \
 autoconf automake libtool \
 libhtml-template-compiled-perl \
 libxml-opml-simplegen-perl \
-libxml-libxml-debugging-perl 
+libxml-libxml-debugging-perl \
+openssh-server
+
 RUN DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y python3.6 \
 python-dev \
 python-distribute \
@@ -63,5 +65,5 @@ RUN cd /opt/meme/meme-5.1.0 && \
         rm -rfv /opt/meme
 ENV PATH="/opt/bin:${PATH}"
 
-RUN mkdir mirna
-WORKDIR mirna
+RUN mkdir /mirna
+WORKDIR /mirna
