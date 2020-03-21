@@ -69,5 +69,10 @@ ADD http://meme-suite.org/meme-software/Databases/motifs/motif_databases.12.19.t
 WORKDIR /opt/share/meme-5.1.0/db
 RUN tar xzf motif_databases.12.19.tgz && rm -fv motif_databases.12.19.tgz
 
-RUN mkdir /mirna
-WORKDIR /mirna
+RUN adduser --disabled-password --gecos '' docker
+RUN adduser docker sudo
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+USER docker
+
+RUN mkdir /home/docker/mirna
+WORKDIR /home/docker/mirna
