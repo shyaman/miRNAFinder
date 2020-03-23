@@ -1,36 +1,23 @@
+import os
+dirname = os.path.dirname(__file__)
+filename = os.path.join(dirname, 'vienna/RNA/__init__.py')
+import importlib.util
+spec = importlib.util.spec_from_file_location("RNA", filename)
+RNA = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(RNA)
+
 import re
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import normalize
 import random
 import sys, getopt
-import RNA
 
 #import biopython library
 from Bio import SeqIO
 
 import os
 from collections import OrderedDict
-
-
-inputfile = ''
-outputfile = ''
-try:
-    opts, args = getopt.getopt(sys.argv[1:],"hi:o:",["ifile=","ofile="])
-except getopt.GetoptError:
-    print ('test.py -i <inputfile> -o <outputfile>')
-    sys.exit(2)
-for opt, arg in opts:
-    if opt == '-h':
-        print ('test.py -i <inputfile> -o <outputfile>')
-        sys.exit()
-    elif opt in ("-i", "--ifile"):
-        inputfile = arg
-    elif opt in ("-o", "--ofile"):
-        outputfile = arg
-
-if inputfile == '' or outputfile == '':
-    sys.exit(1)
 
 #Calculate triplet element for given sequrnce and structure
 def calculateTripletElement(seq, struct):
@@ -88,6 +75,24 @@ def calculateTripletElement(seq, struct):
     #Create dataframe and return
     return pd.DataFrame([tripletEl])
 
+inputfile = ''
+outputfile = ''
+try:
+    opts, args = getopt.getopt(sys.argv[1:],"hi:o:",["ifile=","ofile="])
+except getopt.GetoptError:
+    print ('test.py -i <inputfile> -o <outputfile>')
+    sys.exit(2)
+for opt, arg in opts:
+    if opt == '-h':
+        print ('test.py -i <inputfile> -o <outputfile>')
+        sys.exit()
+    elif opt in ("-i", "--ifile"):
+        inputfile = arg
+    elif opt in ("-o", "--ofile"):
+        outputfile = arg
+
+if inputfile == '' or outputfile == '':
+    sys.exit(1)
 # Turn-off dangles globally
 RNA.cvar.dangles = 0
 
@@ -109,12 +114,12 @@ revert_NN = {
             }
 
 fasta_sequences = SeqIO.parse(inputfile,'fasta')
-id = []
+sequence = []
 secondary_structure_dot_bracket = []
 secondary_structure_mfe = []
 for fasta in fasta_sequences:
     seq1 = str(fasta.seq)
-    id.append(fasta.id)
+    sequence.append(seq1)
     # Data structure that will be passed to our MaximumMatching() callback with two components:
     # 1. a 'dummy' fold_compound to evaluate loop energies w/o constraints, 2. a fresh set of energy parameters
     mm_data = { 'dummy': RNA.fold_compound(seq1), 'params': RNA.param() }
@@ -137,7 +142,7 @@ for fasta in fasta_sequences:
     secondary_structure_mfe.append(-mm)
     # print result
     # print ("%s\n%s (MM: %d)\n" %  (seq1, s, mm))
-dict = {'id': id, 'secondary_structure_dot_bracket': secondary_structure_dot_bracket, 
+dict = {'seq': sequence, 'secondary_structure_dot_bracket': secondary_structure_dot_bracket, 
     'secondary_structure_mfe': secondary_structure_mfe}  
 dataframe = pd.DataFrame(dict)
          
@@ -159,3 +164,4 @@ for index, row in dataframe.iterrows():
     tripletDf = tripletDf.append(currDf, ignore_index=True, sort=False)
 newDf = pd.concat([dataframe,tripletDf], axis=1, sort=False)
 newDf.to_csv(outputfile, index=False)
+
