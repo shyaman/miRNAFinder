@@ -9,6 +9,7 @@ meme_files=[]
 infile = '' 
 pos = ''
 neg = ''
+
 try:
     opts, args = getopt.getopt(argv,"hp:n:i:")
 except getopt.GetoptError:
@@ -25,6 +26,8 @@ for opt, arg in opts:
     elif opt in ("-i"):
         infile = arg
 
+if pos == '' or neg == '' or infile == '':
+    sys.exit(1)
 
 def getSeqFromFasta(file):
   data={'id':[],'seq':[]}
