@@ -27,7 +27,8 @@ for opt, arg in opts:
         infile = arg
 
 if pos == '' or neg == '' or infile == '':
-    sys.exit(1)
+  print ('test.py -p <file1> -n <file2> -i <infile>')
+  sys.exit(1)
 
 def getSeqFromFasta(file):
   data={'id':[],'seq':[]}

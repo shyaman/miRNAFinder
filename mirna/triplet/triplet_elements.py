@@ -12,6 +12,26 @@ from Bio import SeqIO
 import os
 from collections import OrderedDict
 
+inputfile = ''
+outputfile = ''
+try:
+    opts, args = getopt.getopt(sys.argv[1:],"hi:o:",["ifile=","ofile="])
+except getopt.GetoptError:
+    print ('test.py -i <inputfile> -o <outputfile>')
+    sys.exit(2)
+for opt, arg in opts:
+    if opt == '-h':
+        print ('test.py -i <inputfile> -o <outputfile>')
+        sys.exit()
+    elif opt in ("-i", "--ifile"):
+        inputfile = arg
+    elif opt in ("-o", "--ofile"):
+        outputfile = arg
+
+if inputfile == '' or outputfile == '':
+    print ('test.py -i <inputfile> -o <outputfile>')
+    sys.exit(1)
+
 #Calculate triplet element for given sequrnce and structure
 def calculateTripletElement(seq, struct):
     #preprocess sequence and structure
@@ -68,24 +88,6 @@ def calculateTripletElement(seq, struct):
     #Create dataframe and return
     return pd.DataFrame([tripletEl])
 
-inputfile = ''
-outputfile = ''
-try:
-    opts, args = getopt.getopt(sys.argv[1:],"hi:o:",["ifile=","ofile="])
-except getopt.GetoptError:
-    print ('test.py -i <inputfile> -o <outputfile>')
-    sys.exit(2)
-for opt, arg in opts:
-    if opt == '-h':
-        print ('test.py -i <inputfile> -o <outputfile>')
-        sys.exit()
-    elif opt in ("-i", "--ifile"):
-        inputfile = arg
-    elif opt in ("-o", "--ofile"):
-        outputfile = arg
-
-if inputfile == '' or outputfile == '':
-    sys.exit(1)
 # Turn-off dangles globally
 RNA.cvar.dangles = 0
 
@@ -156,5 +158,5 @@ for index, row in dataframe.iterrows():
     currDf = calculateTripletElement(seq, struct)
     tripletDf = tripletDf.append(currDf, ignore_index=True, sort=False)
 newDf = pd.concat([dataframe,tripletDf], axis=1, sort=False)
-newDf.to_csv(outputfile, index=False)
+newDf.to_excel(outputfile+'.xlsx', index=False)
 
