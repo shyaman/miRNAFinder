@@ -1,17 +1,10 @@
-import os
-dirname = os.path.dirname(__file__)
-filename = os.path.join(dirname, 'vienna/RNA/__init__.py')
-import importlib.util
-spec = importlib.util.spec_from_file_location("RNA", filename)
-RNA = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(RNA)
-
 import re
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import normalize
 import random
 import sys, getopt
+import RNA
 
 #import biopython library
 from Bio import SeqIO
@@ -114,12 +107,12 @@ revert_NN = {
             }
 
 fasta_sequences = SeqIO.parse(inputfile,'fasta')
-sequence = []
+id = []
 secondary_structure_dot_bracket = []
 secondary_structure_mfe = []
 for fasta in fasta_sequences:
     seq1 = str(fasta.seq)
-    sequence.append(seq1)
+    id.append(fasta.id)
     # Data structure that will be passed to our MaximumMatching() callback with two components:
     # 1. a 'dummy' fold_compound to evaluate loop energies w/o constraints, 2. a fresh set of energy parameters
     mm_data = { 'dummy': RNA.fold_compound(seq1), 'params': RNA.param() }
@@ -142,7 +135,7 @@ for fasta in fasta_sequences:
     secondary_structure_mfe.append(-mm)
     # print result
     # print ("%s\n%s (MM: %d)\n" %  (seq1, s, mm))
-dict = {'seq': sequence, 'secondary_structure_dot_bracket': secondary_structure_dot_bracket, 
+dict = {'id': id, 'secondary_structure_dot_bracket': secondary_structure_dot_bracket, 
     'secondary_structure_mfe': secondary_structure_mfe}  
 dataframe = pd.DataFrame(dict)
          
@@ -164,4 +157,3 @@ for index, row in dataframe.iterrows():
     tripletDf = tripletDf.append(currDf, ignore_index=True, sort=False)
 newDf = pd.concat([dataframe,tripletDf], axis=1, sort=False)
 newDf.to_csv(outputfile, index=False)
-

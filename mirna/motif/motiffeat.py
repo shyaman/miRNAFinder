@@ -92,6 +92,7 @@ motif_features={key: [] for key in motif_list}
 
 data=getSeqFromFasta(infile)
 
+data_motifs['id']=data['id']
 data_motifs['seq']=data['seq']
 
 for motif in motif_list:
