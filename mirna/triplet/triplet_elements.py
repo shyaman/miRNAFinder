@@ -1,11 +1,4 @@
-import os
-dirname = os.path.dirname(__file__)
-filename = os.path.join(dirname, 'vienna/RNA/__init__.py')
-import importlib.util
-spec = importlib.util.spec_from_file_location("RNA", filename)
-RNA = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(RNA)
-
+import RNA
 import re
 import numpy as np
 import pandas as pd
