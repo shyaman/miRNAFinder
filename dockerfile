@@ -20,7 +20,7 @@ libhtml-template-compiled-perl \
 libxml-opml-simplegen-perl \
 libxml-libxml-debugging-perl \
 openssh-server \
-sudo \ 
+sudo \
 wget
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y python3.6 \
