@@ -20,7 +20,8 @@ libhtml-template-compiled-perl \
 libxml-opml-simplegen-perl \
 libxml-libxml-debugging-perl \
 openssh-server \
-sudo
+sudo \ 
+wget
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y python3.6 \
 python-dev \
@@ -85,7 +86,5 @@ RUN mkdir /home/docker/mirna
 RUN sudo chown docker:sudo /home/docker/mirna/ -R
 WORKDIR /home/docker/mirna
 
-ADD ftp://ftp.ebi.ac.uk/pub/databases/Rfam/CURRENT/Rfam.cm.gz /home/docker/mirna/cmscan-rfam
-RUN gunzip Rfam.cm.gz
-ADD ftp://ftp.ebi.ac.uk/pub/databases/Rfam/CURRENT/Rfam.clanin /home/docker/mirna/cmscan-rfam
-ADD cmpress Rfam.cm
+RUN wget ftp://ftp.ebi.ac.uk/pub/databases/Rfam/CURRENT/Rfam.cm.gz /home/docker/mirna/cmscan-rfam && gunzip Rfam.cm.gz
+RUN wget ftp://ftp.ebi.ac.uk/pub/databases/Rfam/CURRENT/Rfam.clanin /home/docker/mirna/cmscan-rfam && cmpress Rfam.cm
