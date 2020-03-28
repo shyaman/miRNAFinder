@@ -72,7 +72,7 @@ RUN tar xzf motif_databases.12.19.tgz && rm -fv motif_databases.12.19.tgz
 #install cmscan
 WORKDIR /home/docker/mirna/cmscan-rfam
 ADD http://eddylab.org/infernal/infernal-1.1.3.tar.gz .
-RUN tar xf infernal-1.1.2.tar.gz && rm -fv infernal-1.1.2.tar.g
+RUN tar xf infernal-1.1.2.tar.gz && rm -fv infernal-1.1.2.tar.gz
 RUN cd infernal-1.1.2 && ./configure && make && make install
 ADD ftp://ftp.ebi.ac.uk/pub/databases/Rfam/CURRENT/Rfam.cm.gz .
 RUN gunzip Rfam.cm.gz
