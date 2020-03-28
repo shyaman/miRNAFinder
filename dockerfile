@@ -84,10 +84,11 @@ USER docker
 
 RUN mkdir /home/docker/mirna
 RUN sudo chown docker:sudo /home/docker/mirna/ -R
-WORKDIR /home/docker/mirna
 
-RUN cd /home/docker/mirna/cmscan-rfam
+WORKDIR /home/docker/mirna/cmscan-rfam
 RUN wget ftp://ftp.ebi.ac.uk/pub/databases/Rfam/CURRENT/Rfam.cm.gz && gunzip Rfam.cm.gz
 RUN wget ftp://ftp.ebi.ac.uk/pub/databases/Rfam/CURRENT/Rfam.clanin && cmpress Rfam.cm
+WORKDIR /home/docker/mirna/
+
 
 
