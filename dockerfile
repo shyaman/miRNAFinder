@@ -71,7 +71,7 @@ WORKDIR /opt/share/meme-5.1.0/db
 RUN tar xzf motif_databases.12.19.tgz && rm -fv motif_databases.12.19.tgz
 
 #install cmscan
-RUN mkdir /opt/cms
+RUN mkdir /opt/cmscan
 ADD http://eddylab.org/infernal/infernal-1.1.3.tar.gz /opt/cmscan
 WORKDIR /opt/cmscan
 RUN tar xf infernal-1.1.3.tar.gz && rm -fv infernal-1.1.3.tar.gz
