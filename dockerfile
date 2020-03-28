@@ -7,7 +7,13 @@ apt-utils \
 build-essential \
 tar \
 default-jre \
-libopenmpi-dev \
+openssh-server \
+sudo \
+wget
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get update
+
+RUN DEBIAN_FRONTEND=noninteractive libopenmpi-dev \
 openmpi-bin \
 ghostscript \
 libgs-dev \
@@ -18,10 +24,7 @@ libxml2-dev \
 autoconf automake libtool \
 libhtml-template-compiled-perl \
 libxml-opml-simplegen-perl \
-libxml-libxml-debugging-perl \
-openssh-server \
-sudo \
-wget
+libxml-libxml-debugging-perl
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y python3.6 \
 python-dev \
