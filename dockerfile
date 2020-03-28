@@ -75,9 +75,7 @@ RUN mkdir /opt/cmscan
 ADD http://eddylab.org/infernal/infernal-1.1.3.tar.gz /opt/cmscan
 WORKDIR /opt/cmscan
 RUN tar xf infernal-1.1.3.tar.gz && rm -fv infernal-1.1.3.tar.gz
-RUN wget ftp://ftp.ebi.ac.uk/pub/databases/Rfam/CURRENT/Rfam.cm.gz && gunzip Rfam.cm.gz
-RUN wget ftp://ftp.ebi.ac.uk/pub/databases/Rfam/CURRENT/Rfam.clanin && cmpress Rfam.cm
-RUN cd infernal-1.1.3 && ./configure && make && make install && rm -rf /opt/cmscan/infernal-1.1.3
+RUN cd infernal-1.1.3 && ./configure && make && make install && rm -rf /opt/cmscan/
 
 RUN adduser --disabled-password --gecos '' docker
 RUN adduser docker sudo
@@ -85,7 +83,7 @@ RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 USER docker
 
 RUN mkdir /home/docker/mirna
-RUN sudo chown docker:sudo /home/docker/mirna/ -R
+RUN sudo chown docker:docker /home/docker/mirna/ -R
 WORKDIR /home/docker/mirna/
 
 
