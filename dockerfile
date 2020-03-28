@@ -73,8 +73,8 @@ RUN tar xzf motif_databases.12.19.tgz && rm -fv motif_databases.12.19.tgz
 RUN mkdir /opt/cms
 ADD http://eddylab.org/infernal/infernal-1.1.3.tar.gz /opt/cms
 WORKDIR /opt/cms
-RUN tar xf infernal-1.1.2.tar.gz && rm -fv infernal-1.1.2.tar.gz
-RUN cd infernal-1.1.2 && ./configure && make && make install && rm -rf /opt/cms/
+RUN tar xf infernal-1.1.3.tar.gz && rm -fv infernal-1.1.3.tar.gz
+RUN cd infernal-1.1.3 && ./configure && make && make install && rm -rf /opt/cms/
 
 RUN adduser --disabled-password --gecos '' docker
 RUN adduser docker sudo
