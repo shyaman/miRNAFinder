@@ -19,6 +19,7 @@ autoconf automake libtool \
 libhtml-template-compiled-perl \
 libxml-opml-simplegen-perl \
 libxml-libxml-debugging-perl \
+openssh-server \
 sudo \
 wget
 
@@ -83,7 +84,9 @@ USER docker
 
 RUN mkdir /home/docker/mirna
 RUN sudo chown docker:sudo /home/docker/mirna/ -R
-WORKDIR /home/docker/mirna
 
-RUN wget ftp://ftp.ebi.ac.uk/pub/databases/Rfam/CURRENT/Rfam.cm.gz /home/docker/mirna/cmscan-rfam && gunzip Rfam.cm.gz
-RUN wget ftp://ftp.ebi.ac.uk/pub/databases/Rfam/CURRENT/Rfam.clanin /home/docker/mirna/cmscan-rfam && cmpress Rfam.cm
+RUN cd /home/docker/mirna/cmscan-rfam
+RUN wget ftp://ftp.ebi.ac.uk/pub/databases/Rfam/CURRENT/Rfam.cm.gz && gunzip Rfam.cm.gz
+RUN wget ftp://ftp.ebi.ac.uk/pub/databases/Rfam/CURRENT/Rfam.clanin && cmpress Rfam.cm
+
+WORKDIR /home/docker/mirna
