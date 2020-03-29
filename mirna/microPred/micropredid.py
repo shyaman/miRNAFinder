@@ -24,6 +24,10 @@ for opt, arg in opts:
 print ('Input file is :', inputfile)
 print ('Output file is :', outputfile)
 
+if inputfile == '' or outputfile == '':
+  print ('test.py -i <inputfile> -o <outputfile>')
+  sys.exit(1)
+
 cols = ['id', 'cg', '%AA', '%AC', '%AG', '%AU', '%CA', '%CC', '%CG', '%CU', '%GA', '%GC', '%GG', '%GU', '%UA', '%UC', '%UG', '%UU', 'mfe1', 'mfe2', 'dG', 'dP', 'dQ', 'dD', 'dF', 'zG', 'zP', 'zQ', 'zD', 'zF', 'mfe3', 'mfe4', 'nefe', 'freq', 'div', 'diff', 'dH', 'dHL', 'dS', 'dSL', 'Tm', 'TmL', 'auL', 'gcL', 'guL', 'bpStems', 'auStems', 'gcStems', 'guStems']
 fasta_sequences = SeqIO.parse(open("../data/"+inputfile),'fasta')
 id = []
