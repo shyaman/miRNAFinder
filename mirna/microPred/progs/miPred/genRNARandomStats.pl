@@ -8,10 +8,8 @@
 
 use FindBin;
 use File::Spec;
-# use lib File::Spec->catdir($FindBin::Bin, 'ViennaRNA/share/perl5/');
-# use lib File::Spec->catdir($FindBin::Bin, 'ViennaRNA/lib/x86_64-linux-gnu/perl5/5.26/');
-use lib File::Spec->catdir($FindBin::Bin, 'ViennaRNA-1.6.4/Perl/blib/arch/');
-use lib File::Spec->catdir($FindBin::Bin, 'ViennaRNA-1.6.4/Perl/blib/lib/');
+use lib File::Spec->catdir($FindBin::Bin, 'ViennaRNA/share/perl5/');
+use lib File::Spec->catdir($FindBin::Bin, 'ViennaRNA/lib/x86_64-linux-gnu/perl5/5.26/');
 use lib "./miPred/Shuffle-1.4/blib/lib";
 use lib "./miPred/Statistics-Basic-0.41.3/blib/lib";
 use lib "./miPred/Shuffle-1.4/blib/lib";
