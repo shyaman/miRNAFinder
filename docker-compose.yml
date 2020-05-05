@@ -3,5 +3,5 @@ services:
   web:
     build: .
     volumes:
-      - ./mirna:/home/docker/mirna
+      - ./mirna:/mirna
     command: tail -F anything

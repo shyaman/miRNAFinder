@@ -77,14 +77,8 @@ WORKDIR /opt/cmscan
 RUN tar xf infernal-1.1.3.tar.gz && rm -fv infernal-1.1.3.tar.gz
 RUN cd infernal-1.1.3 && ./configure && make && make install && rm -rf /opt/cmscan/
 
-RUN adduser --disabled-password --gecos '' docker
-RUN adduser docker sudo
-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-USER docker
-
-RUN mkdir /home/docker/mirna
-RUN sudo chown docker:docker /home/docker/mirna/ -R
-WORKDIR /home/docker/mirna/
+RUN mkdir /mirna
+WORKDIR /mirna
 
 
 
