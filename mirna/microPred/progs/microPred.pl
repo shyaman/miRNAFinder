@@ -55,7 +55,7 @@
    print("\n\t-filtering all features...\n");
    system("java filter_all $fn");
    system("rm ../data/$fn.*");
-   system("python3 ../micropredid.py -i $fn -o ../data/$fn");
+#    system("python3 ../micropredid.py -i $fn -o ../data/$fn");
    #leaving script here(only features are required)
    exit;
    #Formating into libSVM input file
