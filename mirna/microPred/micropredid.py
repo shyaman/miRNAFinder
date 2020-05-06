@@ -29,11 +29,11 @@ if inputfile == '' or outputfile == '':
   sys.exit(1)
 
 cols = ['id', 'cg', '%AA', '%AC', '%AG', '%AU', '%CA', '%CC', '%CG', '%CU', '%GA', '%GC', '%GG', '%GU', '%UA', '%UC', '%UG', '%UU', 'mfe1', 'mfe2', 'dG', 'dP', 'dQ', 'dD', 'dF', 'zG', 'zP', 'zQ', 'zD', 'zF', 'mfe3', 'mfe4', 'nefe', 'freq', 'div', 'diff', 'dH', 'dHL', 'dS', 'dSL', 'Tm', 'TmL', 'auL', 'gcL', 'guL', 'bpStems', 'auStems', 'gcStems', 'guStems']
-fasta_sequences = SeqIO.parse(open("../data/"+inputfile),'fasta')
+fasta_sequences = SeqIO.parse(open("./data/"+inputfile),'fasta')
 id = []
 for fasta in fasta_sequences:
     id.append(fasta.id)
-ft = pd.read_csv("../data/all."+inputfile+"-48.features",sep='\s+',header=None)
+ft = pd.read_csv("./data/all."+inputfile+"-48.features",sep='\s+',header=None)
 ft.insert(loc=0,column ='id', value=id)
 ft.columns = cols
 ft.to_excel(outputfile+".xlsx",index=False)
