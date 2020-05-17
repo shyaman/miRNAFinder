@@ -43,9 +43,9 @@ combined_data['seq']=excels[2]['seq']
 combined_data['secondary_structure_dot_bracket']=excels[2]['secondary_structure_dot_bracket']
 
 for data in excels:
-for col in data:
-    if(col!='id' and col!="seq" and col!='secondary_structure_dot_bracket'):
-    combined_data[col]=data[col]
+    for col in data:
+        if(col!='id' and col!="seq" and col!='secondary_structure_dot_bracket'):
+        combined_data[col]=data[col]
 
 combined_data = pd.DataFrame(combined_data)
 combined_data.to_excel(outfile,index=False)

@@ -9,15 +9,16 @@ meme_files=[]
 infile = '' 
 pos = ''
 neg = ''
+out = ''
 
 try:
-    opts, args = getopt.getopt(argv,"hp:n:i:")
+    opts, args = getopt.getopt(argv,"hp:n:i:o:")
 except getopt.GetoptError:
-    print ('test.py -p <file1> -n <file2> -i <infile>')
+    print ('test.py -p <file1> -n <file2> -i <infile> -o <outfile>')
     sys.exit(2)
 for opt, arg in opts:
     if opt == '-h':
-        print ('test.py -p <file1> -n <file2> -i <infile>')
+        print ('test.py -p <file1> -n <file2> -i <infile> -o <outfile>')
         sys.exit()
     elif opt in ("-p"):
         pos = arg
@@ -25,9 +26,11 @@ for opt, arg in opts:
         neg = arg
     elif opt in ("-i"):
         infile = arg
+    elif opt in ("-o"):
+        out = arg
 
-if pos == '' or neg == '' or infile == '':
-  print ('test.py -p <file1> -n <file2> -i <infile>')
+if pos == '' or neg == '' or infile == '' or out == '':
+  print ('test.py -p <file1> -n <file2> -i <infile> -o <outfile>')
   sys.exit(1)
 
 def getSeqFromFasta(file):
@@ -121,6 +124,6 @@ for i, motif in enumerate(motif_list):
     data_motifs["motif"+str(i)]=motif_features[motif]
 
 pd_motifs = pd.DataFrame(data_motifs)
-pd_motifs.to_excel(infile+'.xlsx',index=False)
+pd_motifs.to_excel(out+'.xlsx',index=False)
 
 
