@@ -48,4 +48,4 @@ for data in excels:
             combined_data[col]=data[col]
 
 combined_data = pd.DataFrame(combined_data)
-combined_data.to_excel(outfile,index=False)
+combined_data.to_excel(outfile+'.xlsx',index=False)

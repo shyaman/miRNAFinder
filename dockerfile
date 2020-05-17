@@ -35,7 +35,7 @@ pandas \
 scipy 
 RUN pip3 install sklearn
 RUN pip3 install biopython
-RUN pip3 install openpyxl
+RUN pip3 install openpyxl xlrd
 
 # Install ViennaRNA
 ADD https://www.tbi.univie.ac.at/RNA/download/ubuntu/ubuntu_18_04/python3-rna_2.4.14-1_amd64.deb .
