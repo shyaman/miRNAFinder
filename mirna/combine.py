@@ -26,7 +26,7 @@ for opt, arg in opts:
         motif = arg
     elif opt in ("-t"):
         triplet = arg
-    elif opt in ("-i"):
+    elif opt in ("-o"):
         outfile = arg
 
 if micropred == '' or motif == '' or outfile == '' or triplet == '' :
