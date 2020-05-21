@@ -5,3 +5,4 @@ services:
     volumes:
       - ./mirna:/mirna
     command: tail -F anything
+    user: ${CURRENT_UID}
