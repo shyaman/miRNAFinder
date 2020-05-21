@@ -1,1 +1,1 @@
-CURRENT_UID=$(id -u):$(id -g) docker-compose up
+CURRENT_UID=$(id -u):$(id -g) docker-compose up -d
