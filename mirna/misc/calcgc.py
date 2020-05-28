@@ -8,7 +8,7 @@ def calcAGUC(seq):
   length = len(seq)
   return freq['G'], freq['C'], length
 
-len = []
+leng = []
 mfe = []
 id = []
 gc = []
@@ -17,10 +17,10 @@ for record in SeqIO.parse("/mirna/gc.mfe", "fasta"):
     x = re.search(r"(\w+)[(|)|.]+[+-]?([0-9]*[.]?[0-9]+)", str(record.seq))
     mfe.append(float(x.group(2)))
     seq = x.group(1)
-    len.append(len(seq))
+    leng.append(len(seq))
     G,C,l = calcAGUC(seq)
     gc.append((G+C)/l*100)
 
-dict = {'id': id, 'len': len, 
+dict = {'id': id, 'len': leng, 
         'mfe': mfe,'GC':gc}  
 pd.DataFrame(dict).to_excel('gc.xlsx',index=False)
