@@ -14,11 +14,11 @@ out = ''
 try:
     opts, args = getopt.getopt(argv,"hp:n:i:o:")
 except getopt.GetoptError:
-    print ('test.py -p <file1> -n <file2> -i <infile> -o <outfile>')
+    print ('motiffeat.py -p <file1> -n <file2> -i <infile> -o <outfile>')
     sys.exit(2)
 for opt, arg in opts:
     if opt == '-h':
-        print ('test.py -p <file1> -n <file2> -i <infile> -o <outfile>')
+        print ('motiffeat.py -p <file1> -n <file2> -i <infile> -o <outfile>')
         sys.exit()
     elif opt in ("-p"):
         pos = arg
@@ -30,7 +30,7 @@ for opt, arg in opts:
         out = arg
 
 if pos == '' or neg == '' or infile == '' or out == '':
-  print ('test.py -p <file1> -n <file2> -i <infile> -o <outfile>')
+  print ('motiffeat.py -p <file1> -n <file2> -i <infile> -o <outfile>')
   sys.exit(1)
 
 def getSeqFromFasta(file):

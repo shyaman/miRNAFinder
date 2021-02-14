@@ -1,2 +1,4 @@
 #!/bin/bash
-CURRENT_UID=$(id -u):$(id -g) docker-compose up -d
+# docker-compose run --rm env
+docker build -t mirnafinderenv .
+docker run -v $PWD/mirna/:/mirna -u `id -u`:`id -g` -it mirnafinderenv

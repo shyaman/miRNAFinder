@@ -6,11 +6,6 @@
 # DESCRIPTION: Generates stats from fasta
 ############################################################################
 
-use FindBin;
-use File::Spec;
-use lib File::Spec->catdir($FindBin::Bin, 'ViennaRNA/share/perl5/');
-use lib File::Spec->catdir($FindBin::Bin, 'ViennaRNA/lib/x86_64-linux-gnu/perl5/5.26/');
-
 use warnings;
 use strict;
 use Getopt::Long;

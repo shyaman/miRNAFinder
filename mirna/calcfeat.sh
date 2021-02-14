@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 (cd microPred && ./calculateHere.sh $1 $2_micropred)
 (cd motif && python3 motiffeat.py -p pos/meme.xml -n neg/meme.xml -i ../microPred/data/$1 -o $2_motif )
 (cd triplet && python3 triplet_elements.py -i ../microPred/data/$1 -o $2_triplet)
