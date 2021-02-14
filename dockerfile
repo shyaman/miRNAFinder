@@ -1,35 +1,17 @@
 FROM continuumio/miniconda3:4.9.2
 
-RUN conda install -y pandas=1.2.1 \
-                    biopython=1.78 
-         
-RUN conda install -c bioconda -y viennarna=2.3.3
+SHELL ["/bin/bash", "--login", "-c"]
+
 RUN mkdir -p /usr/share/man/man1/
-ADD ./perl-rna_2.4.17-1_amd64.deb .
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install --no-install-recommends -y sudo default-jre build-essential zlib1g-dev libxml2-dev libxml-parser-perl 
+
+ADD ./perl-rna_2.4.17-1_amd64.deb ./environment.yml ./
+RUN conda env create -f environment.yml
+RUN conda init bash
+         
 RUN DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends -y ./perl-rna_2.4.17-1_amd64.deb
-RUN DEBIAN_FRONTEND=noninteractive apt-get update -y && apt-get install --no-install-recommends -y default-jre
 
-
-RUN conda install -y openpyxl=3.0.6 
-
-RUN mkdir /opt/meme
-ADD http://meme-suite.org/meme-software/5.1.0/meme-5.1.0.tar.gz /opt/meme
-
-RUN DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y build-essential zlib1g-dev libxml2-dev autoconf automake libtool
-
-WORKDIR /opt/meme/
-RUN tar zxvf meme-5.1.0.tar.gz && rm -fv meme-5.1.0.tar.gz
-RUN cd /opt/meme/meme-5.1.0 && \
-	./configure --prefix=/opt  --enable-build-libxml2 --enable-build-libxslt  --with-url=http://meme-suite.org && \ 
-	make && \
-	make install && \
-        rm -rfv /opt/meme
-ENV PATH="/opt/bin:/opt/libexec/meme-5.1.0:${PATH}"
-ADD http://meme-suite.org/meme-software/Databases/motifs/motif_databases.12.19.tgz /opt/share/meme-5.1.0/db
-WORKDIR /opt/share/meme-5.1.0/db
-RUN tar xzf motif_databases.12.19.tgz && rm -fv motif_databases.12.19.tgz
-
-WORKDIR /mirna
+RUN rm ./perl-rna_2.4.17-1_amd64.deb ./environment.yml
 
 # RUN DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y build-essential \
 # apt-utils \
@@ -52,40 +34,29 @@ WORKDIR /mirna
 # sudo \
 # wget
 
-# RUN DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y python3.6 \
-# python-dev \
-# python-distribute \
-# python3-pip
 
 # RUN pip3 install wheel \
 # setuptools \
-# numpy \
-# pandas \
 # scipy 
-# RUN pip3 install sklearn
-# RUN pip3 install biopython
+
 # RUN pip3 install openpyxl xlrd
 
-# # Install ViennaRNA
-# ADD https://www.tbi.univie.ac.at/RNA/download/ubuntu/ubuntu_18_04/python3-rna_2.4.14-1_amd64.deb .
-# RUN DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends -y ./python3-rna_2.4.14-1_amd64.deb && rm python3-rna_2.4.14-1_amd64.deb
-
-# #install MEME suite
-# RUN PERL_MM_USE_DEFAULT=1 perl -MCPAN -e 'install Log::Log4perl'
-# RUN PERL_MM_USE_DEFAULT=1 perl -MCPAN -e 'install Math::CDF'
-# RUN PERL_MM_USE_DEFAULT=1 perl -MCPAN -e 'install CGI'
-# RUN PERL_MM_USE_DEFAULT=1 perl -MCPAN -e 'install HTML::PullParser'
-# RUN PERL_MM_USE_DEFAULT=1 perl -MCPAN -e 'install HTML::Template'
-RUN PERL_MM_USE_DEFAULT=1 perl -MCPAN -e 'install XML::Simple'
-RUN PERL_MM_USE_DEFAULT=1 perl -MCPAN -e 'install XML::Parser::Expat'
-RUN PERL_MM_USE_DEFAULT=1 perl -MCPAN -e 'install XML::LibXML'
-RUN PERL_MM_USE_DEFAULT=1 perl -MCPAN -e 'install XML::LibXML::Simple'
-# RUN PERL_MM_USE_DEFAULT=1 perl -MCPAN -e 'install XML::Compile'
-# RUN PERL_MM_USE_DEFAULT=1 perl -MCPAN -e 'install XML::Compile::SOAP11'
-# RUN PERL_MM_USE_DEFAULT=1 perl -MCPAN -e 'install XML::Compile::WSDL11'
-# RUN PERL_MM_USE_DEFAULT=1 perl -MCPAN -e 'install XML::Compile::Transport::SOAPHTTP'
+RUN mkdir /opt/meme
+ADD http://meme-suite.org/meme-software/5.1.0/meme-5.1.0.tar.gz /opt/meme
+WORKDIR /opt/meme/
+RUN tar zxvf meme-5.1.0.tar.gz && rm -fv meme-5.1.0.tar.gz
+RUN cd /opt/meme/meme-5.1.0 && \
+	./configure --prefix=/opt  --enable-build-libxml2 --enable-build-libxslt  --with-url=http://meme-suite.org && \ 
+	make && \
+	make install && \
+        rm -rfv /opt/meme
+ENV PATH="/opt/bin:/opt/libexec/meme-5.1.0:${PATH}"
+ADD http://meme-suite.org/meme-software/Databases/motifs/motif_databases.12.19.tgz /opt/share/meme-5.1.0/db
+WORKDIR /opt/share/meme-5.1.0/db
+RUN tar xzf motif_databases.12.19.tgz && rm -fv motif_databases.12.19.tgz
 
 
+WORKDIR /mirna
 
 # #install cmscan
 # RUN mkdir /opt/cmscan

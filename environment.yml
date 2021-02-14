@@ -1,0 +1,11 @@
+name: mirnaenv
+channels:
+  - defaults
+  - bioconda
+dependencies:
+  - python=3.5
+  - viennarna=2.4.11
+  - pandas=0.23.4
+  - biopython=1.72
+  - scikit-learn
+  - openpyxl=2.6.3
