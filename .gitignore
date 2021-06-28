@@ -1,4 +1,8 @@
 .DS_Store
-.xlsx
-.tblout
-.features
+*.xlsx
+*.tblout
+*.features
+*.eps
+*.xml
+*.features
+*.txt
